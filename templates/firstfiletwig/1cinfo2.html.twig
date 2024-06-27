@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello from 1CINFO2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello from 1CINFO2</h1>
+        {% set x=1 %}
+        {% set y=2 %}
+        {% set z=x+y %}
+        {% set tab= {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6} %}
+        This friendly message is coming from: Twig 1CINFO2  
+
+        Hello {{slug}}
+        <ul>
+            <li>X = {{x}}</li>
+            <li>Y = {{y}}</li>
+            <li>Z = {{z}}</li>
+        </ul>
+        <div>
+            <h2>Tableau</h2>
+            <ul>
+                {% for key, value in tab %}
+                    <li>{{key}} = {{value}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <p>Current date and time: {{ 'now'|date('Y-m-d H:i:s') }}</p>
+    
+        <p>Is 2 even? {{ 2 is even ? 'Yes' : 'No' }}</p>
+
+    </div>
+</body>
+</html>
