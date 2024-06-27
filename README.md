@@ -102,7 +102,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions or inquiries, please contact Zied Snoussi at [ziedsnoussi.tn@gmail.com].
+For any questions or inquiries, please contact Zied Snoussi at ziedsnoussi.tn@gmail.com.
 
 ---
 
