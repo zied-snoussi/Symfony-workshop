@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: gray;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: green;
+            color: white;
+        }
+        tr:nth-child(even) {background-color: #f9f9f9;}
+        .time {
+            color: blue;
+            font-weight: bold;
+            right: 0;
+            width: 100%;
+        }
+        .hidden { display: none; }
+        #loadDataBtn {
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            :hover {
+                background-color: darkgreen;
+            }
+        }
+        #authHeader {
+            color: green;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+            :hover {
+                background-color: lightgreen;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="loadDataBtn">View Data</button>
+        <div id="productsTable" class="hidden">
+            <h1 class="authHeader">List of Products</h1>
+            <p>Number of products: {{ products|length }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.id|default('-') }}</td>
+                            <td>{{ product.name|default('-')|upper }}</td>
+                            <td>{{ product.quantity|default('-') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p width="100%" align="right">
+        Current date and time: 
+        <span class="time">{{ 'now'|date('Y-m-d H:i:s') }}
+        </span>
+        </p>
+    </div>
+    <script>
+            document.getElementById('loadDataBtn').addEventListener('click', function() {
+                var table = document.getElementById('productsTable');
+                table.classList.toggle('hidden');
+                if (table.classList.contains('hidden')) {
+                    this.textContent = 'View Data';
+                } else {
+                    this.textContent = 'Hide Data';
+                }
+            });
+    </script>
+</body>
+</html>
