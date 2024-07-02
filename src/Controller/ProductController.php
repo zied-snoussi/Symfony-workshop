@@ -7,6 +7,7 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ProductController extends AbstractController
 {
@@ -28,17 +29,14 @@ class ProductController extends AbstractController
     }
 
     #[Route("/product/add", name: "add_product")]
-    public function addProduct(ProductRepository $productRepository): Response
+    public function addProduct(ManagerRegistry $managerRegistry): Response
     {
+        $entityManager = $managerRegistry->getManager();
         $product = new Product();
         $product->setName('Product ' . rand(1, 100));
-        $product->setQuantity(rand(1, 100));
-        $entityManager = $this->getDoctrine()->getManager();
+        $product->setQuantity(rand(1, 10));
         $entityManager->persist($product);
         $entityManager->flush();
-        $products = $productRepository->findAll();
-        return $this->render('products/index.html.twig', [
-            'products' => $products,
-        ]);
+        return new Response('Product was added with id ' . $product->getId());
     }
 }
