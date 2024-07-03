@@ -13,15 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product/', name: 'app_product')]
-    public function index(): Response
-    {
-        return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-    }
 
-    #[Route("/product/products", name: "products")]
+    #[Route("/products/", name: "products")]
     public function fetchProducts(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
@@ -30,7 +23,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route("/product/add", name: "add_product")]
+    #[Route("/products/add", name: "add_product")]
     public function addProduct(ManagerRegistry $doctrine, Request $request): Response
     {
         $product = new Product();
@@ -45,12 +38,12 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('products');
         }
 
-        return $this->render('product/addProduct.html.twig', [
+        return $this->render('products/addProduct.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route("/product/update/{id}", name: "edit_product")]
+    #[Route("/products/update/{id}", name: "edit_product", requirements: ["id" => "\d+"])]
     public function editProduct(ManagerRegistry $doctrine, Request $request, Product $product): Response
     {
         $form = $this->createForm(ProductFormType::class, $product);
@@ -63,8 +56,20 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('products');
         }
 
-        return $this->render('product/updateProduct.html.twig', [
+        return $this->render('products/updateProduct.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route("/products/delete/{id}", name: "delete_product", requirements: ["id" => "\d+"])]
+    public function deleteProduct(ManagerRegistry $doctrine, Product $product): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Product deleted successfully.');
+
+        return $this->redirectToRoute('products');
     }
 }
