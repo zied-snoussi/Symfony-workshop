@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block body %}
+<div class="product-details">
+    <h1>Product Details</h1>
+    <div class="detail">
+        <strong>Name:</strong> {{ product.name }}
+    </div>
+    <div class="detail">
+        <strong>Description:</strong> {{ product.quantity }}
+    </div>
+    <a href="{{ path('products') }}">Back to products list</a>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .product-details {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .detail {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}

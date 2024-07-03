@@ -140,7 +140,7 @@
                         <td>{{ product.name|default('-')|upper }}</td>
                         <td>{{ product.quantity|default('-') }}</td>
                         <td>
-                            <a href="{{ path('details', {'id': product.id}) }}" class="btn btn-details">Details</a>
+                            <a href="{{ path('product_detail', {'id': product.id}) }}" class="btn btn-details">Details</a>
                             <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-update">Update</a>
                             <a href="{{ path('delete_product', {'id': product.id}) }}" class="btn btn-delete">Delete</a>
                         </td>

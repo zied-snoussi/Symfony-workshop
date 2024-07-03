@@ -23,6 +23,14 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route("/products/{id}", name: "product_detail", requirements: ["id" => "\d+"])]
+    public function productDetail(Product $product): Response
+    {
+        return $this->render('products/productDetails.html.twig', [
+            'product' => $product,
+        ]);
+    }
+
     #[Route("/products/add", name: "add_product")]
     public function addProduct(ManagerRegistry $doctrine, Request $request): Response
     {
