@@ -3,28 +3,55 @@
 {% block title %}Product Details{% endblock %}
 
 {% block body %}
-<div class="product-details">
+<div class="product-details-container">
     <h1>Product Details</h1>
     <div class="detail">
         <strong>Name:</strong> {{ product.name }}
     </div>
     <div class="detail">
-        <strong>Description:</strong> {{ product.quantity }}
+        <strong>Quantity:</strong> {{ product.quantity }}
     </div>
-    <a href="{{ path('products') }}">Back to products list</a>
+    <a href="{{ path('products') }}" class="btn-back">Back to products list</a>
 </div>
 {% endblock %}
 
 {% block stylesheets %}
 <style>
-    .product-details {
-        margin: 20px;
+    .product-details-container {
+        max-width: 600px;
+        margin: 40px auto;
         padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .product-details-container h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
     }
     .detail {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+    .detail strong {
+        display: inline-block;
+        width: 100px;
+    }
+    .btn-back {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .btn-back:hover {
+        background-color: darkgreen;
     }
 </style>
 {% endblock %}

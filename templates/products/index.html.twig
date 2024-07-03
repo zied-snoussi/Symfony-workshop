@@ -8,163 +8,143 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+            margin: 0;
             padding: 0;
-            background-color: gray;
+            background-color: #f4f4f4;
             color: #333;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
+            max-width: 1000px;
+            margin: 20px auto;
             background: #fff;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         h1, h2 {
             text-align: center;
             margin-bottom: 20px;
+            color: #4CAF50;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         table, th, td {
             border: 1px solid #ddd;
         }
         th, td {
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
         th {
-            background-color: green;
+            background-color: #4CAF50;
             color: white;
         }
-        tr:nth-child(even) {background-color: #f9f9f9;}
+        tr:nth-child(even) { background-color: #f9f9f9; }
         .time {
             color: blue;
             font-weight: bold;
-            right: 0;
-            width: 100%;
+            display: block;
+            text-align: right;
+            margin-top: 10px;
         }
         .hidden { display: none; }
         #loadDataBtn {
             margin-bottom: 20px;
             cursor: pointer;
-            padding: 10px;
-            background-color: green;
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
+            font-size: 1em;
             transition: background-color 0.3s ease;
-            :hover {
-                background-color: darkgreen;
-            }
         }
-        #authHeader {
-            color: green;
-            font-weight: bold;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: white;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transition: background-color 0.3s ease;
-            :hover {
-                background-color: lightgreen;
-            }
+        #loadDataBtn:hover {
+            background-color: darkgreen;
         }
         .btn {
-                border: none;
-                cursor: pointer;
-                margin-right: 5px;
-                underline: none;
-                color: white;
-                padding: 10px 15px;
-                text-decoration: none; /* Removes underline from links */
-                border-radius: 5px; /* Rounded corners */
-                font-weight: bold; /* Makes text bold */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for 3D effect */
-                transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
-            }
-        .btn-update { 
-            background-color: #4CAF50;                    
-            padding: 10px 15px; } /* Green */
-        .btn-update:hover { 
-            background-color: #45a049;                    
-            text-decoration: none; /* Removes underline from links */ }
-        .btn-delete { 
-            background-color: #f44336;                    
-            border-radius: 5px; /* Rounded corners */ } /* Red */
-        .btn-delete:hover { 
-            background-color: #da190b;                    
-            font-weight: bold; /* Makes text bold */ }
-        .btn-details { 
-            background-color: #008CBA;                    
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for 3D effect */ } /* Blue */
-        .btn-details:hover {
-            background-color: #005f73;                    
-            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */ }
-        .btn-add { 
-            background-color: #008CBA; /* Blue */
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
-
-        .btn-add:hover, .btn-add:focus { 
-            background-color: #005f73; /* Darker blue on hover/focus */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow for hover/focus effect */
-            text-decoration: none; /* Ensures text decoration does not reappear on hover/focus */
+        .btn-update { background-color: #4CAF50; } /* Green */
+        .btn-update:hover { background-color: #45a049; }
+        .btn-delete { background-color: #f44336; } /* Red */
+        .btn-delete:hover { background-color: #da190b; }
+        .btn-details { background-color: #008CBA; } /* Blue */
+        .btn-details:hover { background-color: #005f73; }
+        .btn-add {
+            background-color: #4CAF50; /* Green */
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            display: inline-block;
         }
-</style>
-
-<div class="container">
-    <button id="loadDataBtn">View Data</button>
-    <div id="productsTable" class="hidden">
-        <h1 class="authHeader">List of Products</h1>
-        <p>Number of products: {{ products|length }}</p>
-        {# add button to add product  #}
-        <a href="{{ url('add_product') }}" class="btn btn-add">Add Product</a> 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in products %}
+        .btn-add:hover {
+            background-color: darkgreen;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="loadDataBtn">View Data</button>
+        <div id="productsTable" class="hidden">
+            <h1>List of Products</h1>
+            <p>Number of products: {{ products|length }}</p>
+            <a href="{{ url('add_product') }}" class="btn btn-add">Add Product</a>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ product.id|default('-') }}</td>
-                        <td>{{ product.name|default('-')|upper }}</td>
-                        <td>{{ product.quantity|default('-') }}</td>
-                        <td>
-                            <a href="{{ path('product_detail', {'id': product.id}) }}" class="btn btn-details">Details</a>
-                            <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-update">Update</a>
-                            <a href="{{ path('delete_product', {'id': product.id}) }}" class="btn btn-delete">Delete</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.id|default('-') }}</td>
+                            <td>{{ product.name|default('-')|upper }}</td>
+                            <td>{{ product.quantity|default('-') }}</td>
+                            <td>
+                                <a href="{{ path('product_detail', {'id': product.id}) }}" class="btn btn-details">Details</a>
+                                <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-update">Update</a>
+                                <a href="{{ path('delete_product', {'id': product.id}) }}" class="btn btn-delete">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="time">Current date and time: {{ 'now'|date('Y-m-d H:i:s') }}</p>
     </div>
-    <p width="100%" align="right">
-    Current date and time: 
-    <span class="time">{{ 'now'|date('Y-m-d H:i:s') }}
-    </span>
-    </p>
-</div>
     <script>
-            document.getElementById('loadDataBtn').addEventListener('click', function() {
-                var table = document.getElementById('productsTable');
-                table.classList.toggle('hidden');
-                if (table.classList.contains('hidden')) {
-                    this.textContent = 'View Data';
-                } else {
-                    this.textContent = 'Hide Data';
-                }
-            });
+        document.getElementById('loadDataBtn').addEventListener('click', function() {
+            var table = document.getElementById('productsTable');
+            table.classList.toggle('hidden');
+            this.textContent = table.classList.contains('hidden') ? 'View Data' : 'Hide Data';
+        });
     </script>
+    <div class="footer">
+        <p>&copy; 2024 Our App. All Rights Reserved.</p>
+    </div>
 </body>
 </html>
