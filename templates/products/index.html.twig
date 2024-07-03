@@ -76,21 +76,45 @@
             }
         }
         .btn {
-                padding: 5px 10px;
-                color: white;
                 border: none;
-                border-radius: 3px;
                 cursor: pointer;
                 margin-right: 5px;
                 underline: none;
+                color: white;
+                padding: 10px 15px;
+                text-decoration: none; /* Removes underline from links */
+                border-radius: 5px; /* Rounded corners */
+                font-weight: bold; /* Makes text bold */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for 3D effect */
+                transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
             }
-            .btn-update { background-color: #4CAF50; } /* Green */
-            .btn-update:hover { background-color: #45a049; }
-            .btn-delete { background-color: #f44336; } /* Red */
-            .btn-delete:hover { background-color: #da190b; }
-            .btn-details { background-color: #008CBA; } /* Blue */
-            .btn-details:hover { background-color: #005f73; }
-            .
+        .btn-update { 
+            background-color: #4CAF50;                    
+            padding: 10px 15px; } /* Green */
+        .btn-update:hover { 
+            background-color: #45a049;                    
+            text-decoration: none; /* Removes underline from links */ }
+        .btn-delete { 
+            background-color: #f44336;                    
+            border-radius: 5px; /* Rounded corners */ } /* Red */
+        .btn-delete:hover { 
+            background-color: #da190b;                    
+            font-weight: bold; /* Makes text bold */ }
+        .btn-details { 
+            background-color: #008CBA;                    
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for 3D effect */ } /* Blue */
+        .btn-details:hover {
+            background-color: #005f73;                    
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */ }
+        .btn-add { 
+            background-color: #008CBA; /* Blue */
+        }
+
+        .btn-add:hover, .btn-add:focus { 
+            background-color: #005f73; /* Darker blue on hover/focus */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow for hover/focus effect */
+            text-decoration: none; /* Ensures text decoration does not reappear on hover/focus */
+        }
 </style>
 
 <div class="container">
@@ -98,6 +122,8 @@
     <div id="productsTable" class="hidden">
         <h1 class="authHeader">List of Products</h1>
         <p>Number of products: {{ products|length }}</p>
+        {# add button to add product  #}
+        <a href="{{ url('add_product') }}" class="btn btn-add">Add Product</a> 
         <table>
             <thead>
                 <tr>
