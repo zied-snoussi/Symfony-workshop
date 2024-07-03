@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductFormType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
 {
@@ -29,14 +31,40 @@ class ProductController extends AbstractController
     }
 
     #[Route("/product/add", name: "add_product")]
-    public function addProduct(ManagerRegistry $managerRegistry): Response
+    public function addProduct(ManagerRegistry $doctrine, Request $request): Response
     {
-        $entityManager = $managerRegistry->getManager();
         $product = new Product();
-        $product->setName('Product ' . rand(1, 100));
-        $product->setQuantity(rand(1, 10));
-        $entityManager->persist($product);
-        $entityManager->flush();
-        return new Response('Product was added with id ' . $product->getId());
+        $form = $this->createForm(ProductFormType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('products');
+        }
+
+        return $this->render('product/addProduct.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route("/product/update/{id}", name: "edit_product")]
+    public function editProduct(ManagerRegistry $doctrine, Request $request, Product $product): Response
+    {
+        $form = $this->createForm(ProductFormType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('products');
+        }
+
+        return $this->render('product/updateProduct.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

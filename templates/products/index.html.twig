@@ -75,39 +75,58 @@
                 background-color: lightgreen;
             }
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <button id="loadDataBtn">View Data</button>
-        <div id="productsTable" class="hidden">
-            <h1 class="authHeader">List of Products</h1>
-            <p>Number of products: {{ products|length }}</p>
-            <table>
-                <thead>
+        .btn {
+                padding: 5px 10px;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                margin-right: 5px;
+            }
+            .btn-update { background-color: #4CAF50; } /* Green */
+            .btn-update:hover { background-color: #45a049; }
+            .btn-delete { background-color: #f44336; } /* Red */
+            .btn-delete:hover { background-color: #da190b; }
+            .btn-details { background-color: #008CBA; } /* Blue */
+            .btn-details:hover { background-color: #005f73; }
+</style>
+
+<div class="container">
+    <button id="loadDataBtn">View Data</button>
+    <div id="productsTable" class="hidden">
+        <h1 class="authHeader">List of Products</h1>
+        <p>Number of products: {{ products|length }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Quantity</th>
+                        <td>{{ product.id|default('-') }}</td>
+                        <td>{{ product.name|default('-')|upper }}</td>
+                        <td>{{ product.quantity|default('-') }}</td>
+                        <td>
+                            <a href="{{ path('/product/details', {'id': product.id}) }}" class="btn btn-details">Details</a>
+                            <a href="{{ path('/product/update', {'id': product.id}) }}" class="btn btn-update">Update</a>
+                            <a href="{{ path('/product/delete', {'id': product.id}) }}" class="btn btn-delete">Delete</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                        <tr>
-                            <td>{{ product.id|default('-') }}</td>
-                            <td>{{ product.name|default('-')|upper }}</td>
-                            <td>{{ product.quantity|default('-') }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <p width="100%" align="right">
-        Current date and time: 
-        <span class="time">{{ 'now'|date('Y-m-d H:i:s') }}
-        </span>
-        </p>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+    <p width="100%" align="right">
+    Current date and time: 
+    <span class="time">{{ 'now'|date('Y-m-d H:i:s') }}
+    </span>
+    </p>
+</div>
     <script>
             document.getElementById('loadDataBtn').addEventListener('click', function() {
                 var table = document.getElementById('productsTable');
